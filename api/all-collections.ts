@@ -1,10 +1,27 @@
 import { NowRequest, NowResponse } from '@now/node'
-import mongoose from 'mongoose'
+import { MongoClient } from 'mongodb'
+
+let cachedDb = null
+
+async function getDatabaseReference() {
+  if (cachedDb) {
+    console.log(`returning cached database =DDDD`)
+    return cachedDb
+  }
+
+  const connection = await MongoClient.connect(process.env.MONGO_DATABASE_URL, { useNewUrlParser: true })
+  const db = await connection.db(process.env.MONGO_DATABASE_NAME)
+
+  cachedDb = db
+  return db
+}
 
 export default async (req: NowRequest, res: NowResponse) => {
   
-  const connection = await mongoose.connect(process.env.MONGO_DATABASE_URL, { useNewUrlParser: true })
-  console.log(connection.listCollections)
+  const db = await getDatabaseReference()
+  const collection = await db.collection('users')
 
-  res.status(200).send({ MONGO_DATABASE_URL: process.env.MONGO_DATABASE_URL})
+  const users = await collection.find({}).toArray()
+
+  res.status(200).json({ users })
 }
