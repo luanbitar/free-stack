@@ -7,9 +7,8 @@ export default (req: NowRequest, res: NowResponse) => {
   
   if(notHasPayload(req, res)) return
   const { token } = req.body
-  console.log({ MONGO_DATABASE_URL: process.env.MONGO_DATABASE_URL })
 
-  jwt.verify(token, 'secret_key', (error, decryptedContent) => {
+  jwt.verify(token, process.env.JWT_TOKEN, (error, decryptedContent) => {
     if(error) {
       res.status(500).send({ error })
       return
