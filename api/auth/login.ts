@@ -1,5 +1,6 @@
-import { NowRequest, NowResponse } from '@now/node'
 import jwt from 'jsonwebtoken'
+import { AES, TripleDES, enc } from 'crypto-js'
+import { NowRequest, NowResponse } from '@now/node'
 
 import { notHasPayload } from '../_utils/errors'
 
@@ -8,9 +9,13 @@ export default (req: NowRequest, res: NowResponse) => {
   if(notHasPayload(req, res)) return
   const { userName, password } = req.body
 
-  // decrypt password bridge
-
-  // crypt password to db
+  // decrypt password bridge AES
+  const CLIENT_SECRET = process.env.CRYPTO_CLIENT_SECRET || 'CRYPTO_CLIENT_SECRET'
+  const decryptedPassword = AES.decrypt(password, CLIENT_SECRET).toString(enc.Utf8)
+  
+  // crypt password to db TripleDES
+  const DB_SECRET = process.env.CRYPTO_DB_SECRET || 'CRYPTO_DB_SECRET'
+  const encryptedPassword = TripleDES.encrypt(decryptedPassword, DB_SECRET).toString()
 
   // find username and password
 
@@ -18,7 +23,7 @@ export default (req: NowRequest, res: NowResponse) => {
 
   // finally sign jwt and return
 
-  const token = jwt.sign({ userName, password }, process.env.JWT_TOKEN, { expiresIn: 30 })
+  const token = jwt.sign({ userName, decryptedPassword, encryptedPassword }, process.env.JWT_TOKEN, { expiresIn: 30 })
 
   return res.status(200).send(token)
 }

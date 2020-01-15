@@ -3,6 +3,8 @@
   "name": "gatsby-starter-default",
   "version": "1.0.0",
   "dependencies": {
+    "@types/crypto-js": "^3.1.43",
+    "crypto-js": "^3.1.9-1",
     "gatsby": "^2.18.14",
     "gatsby-image": "^2.0.15",
     "gatsby-plugin-manifest": "^2.0.5",
