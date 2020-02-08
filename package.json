@@ -19,7 +19,7 @@
     "@now/node": "^1.3.0"
   },
   "scripts": {
-    "dev": "gatsby develop",
+    "start": "now dev",
     "build": "gatsby build"
   }
 }

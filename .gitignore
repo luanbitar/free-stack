@@ -70,3 +70,4 @@ yarn-error.log
 .yarn-integrity
 .gitsecret/keys/random_seed
 !*.secret
+.now
