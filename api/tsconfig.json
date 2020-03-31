@@ -1,0 +1,27 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["es2015"],
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": true,
+    "strictBindCallApply": true,
+    "noImplicitThis": true,
+    "alwaysStrict": true,
+    "baseUrl": "./src",
+    "allowSyntheticDefaultImports": false,
+    "esModuleInterop": true,
+    "resolveJsonModule": true,
+    "plugins": [
+      {
+        "name": "typescript-tslint-plugin",
+        "alwaysShowRuleFailuresAsWarnings": false,
+        "ignoreDefinitionFiles": true,
+        "configFile": "./tslint.json",
+        "suppressWhileTypeErrorsPresent": false
+      }
+    ]
+  }
+}
