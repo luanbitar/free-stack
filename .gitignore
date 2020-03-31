@@ -71,3 +71,4 @@ yarn-error.log
 .gitsecret/keys/random_seed
 !*.secret
 .now
+api/env.json

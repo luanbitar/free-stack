@@ -1,0 +1,24 @@
+{
+  "version": 2,
+  "env": {
+    "MONGO_DATABASE_URL": "@mongo-url",
+    "MONGO_DATABASE_NAME": "@mongo-db-name"
+  },
+  "builds": [
+    {
+      "src": "src/**/*.ts",
+      "use": "@now/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/src/$1",
+      "headers": {
+        "Access-Control-Allow-Origin": "*",
+        "Access-Control-Allow-Methods": "GET, POST, PATCH, PUT, DELETE, OPTIONS",
+        "Access-Control-Allow-Headers": "Origin, X-Requested-With, Content-Type, Accept, Authorization, Methods"
+      }
+    }
+  ]
+}
