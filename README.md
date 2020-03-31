@@ -1,4 +1,4 @@
-# API
+# API: https://free-stack-api.now.sh
 
 ## envs
 
