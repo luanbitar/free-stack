@@ -1,14 +1,29 @@
 module.exports = {
   plugins: [
+    `gatsby-plugin-provide-react`,
+    `gatsby-plugin-sass`,
     `gatsby-plugin-sharp`,
+    `gatsby-env-variables`,
+    `gatsby-alias-imports`,
     `gatsby-plugin-offline`,
+    `gatsby-optional-chaining`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-dynamic-routes`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
         path: `${__dirname}/src/images`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-page-creator`,
+      options: {
+        path: `${__dirname}/src/pages`,
+        ignore: {
+          patterns: [`**/*`],
+        },
       },
     },
     {
