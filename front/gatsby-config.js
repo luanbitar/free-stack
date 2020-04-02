@@ -25,13 +25,13 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`,
+        icon: `static/images/gatsby-icon.png`,
       },
     },
     {
       resolve: `gatsby-plugin-sass`,
       options: {
-        data: `@import "${__dirname}/src/styles/internal"`,
+        data: `@import "${__dirname}/src/styles/internal";`,
       },
     },
   ],

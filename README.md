@@ -35,3 +35,24 @@ Features:
 - [scss](https://sass-lang.com/documentation/syntax/structure)
 - [normalize.css](https://github.com/necolas/normalize.css)
 - [rupture](https://github.com/CubaSAN/rupture-sass)
+
+## Routing
+
+Routes are defined in `src/Routes.js` using (gatsby-plugin-dynamic-routes)[https://github.com/luanbitar/gatsby-plugin-dynamic-routes]
+
+## Optional chaining
+
+Provided by (gatsby-optional-chaining)[https://github.com/luanbitar/gatsby-optional-chaining], you can access nested?.object?.keys?.safety
+
+## Import React from "react"
+
+You don't need this line in each component, (gatsby-plugin-provide-react)[https://github.com/luanbitar/gatsby-plugin-provide-react]
+
+## Alias imports
+
+All files inside src will be available with aliases imports
+(gatsby-alias-imports)[https://github.com/luanbitar/gatsby-alias-imports]
+
+## Environment variables
+
+Inside `env/` folder, using (gatsby-env-variables)[https://github.com/luanbitar/gatsby-env-variables]
