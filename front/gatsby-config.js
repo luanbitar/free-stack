@@ -1,6 +1,5 @@
 module.exports = {
   plugins: [
-    `gatsby-plugin-sass`,
     `gatsby-env-variables`,
     `gatsby-alias-imports`,
     `gatsby-plugin-offline`,
@@ -27,6 +26,12 @@ module.exports = {
         theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `src/images/gatsby-icon.png`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        data: `@import "${__dirname}/src/styles/internal"`,
       },
     },
   ],
