@@ -1,13 +1,10 @@
-import { NowRequest, NowResponse } from "@now/node"
+import { Lambda } from "./../../utils/interfaces"
+import { notHasPayload } from "../../utils/errors"
+import signToken from "../../utils/login/signToken"
+import encryptPasswordToDatabase from "../../utils/login/encryptPasswordToDatabase"
+import decryptPasswordFromRequest from "../../utils/login/decryptPasswordFromRequest"
 
-import { notHasPayload } from "../../_utils/errors"
-import signToken from "../../_utils/login/signToken"
-import encryptPasswordToDatabase from "../../_utils/login/encryptPasswordToDatabase"
-import decryptPasswordFromRequest from "../../_utils/login/decryptPasswordFromRequest"
-
-export default (req: NowRequest, res: NowResponse) => {
-  if (notHasPayload(req, res)) return
-
+const login: Lambda = (req, res) => {
   const { userName, password } = req.body
 
   const decryptedPassword = decryptPasswordFromRequest(password)
@@ -22,3 +19,5 @@ export default (req: NowRequest, res: NowResponse) => {
 
   return res.status(200).send(token)
 }
+
+export default notHasPayload(login)

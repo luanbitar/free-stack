@@ -1,6 +1,6 @@
-import getDatabaseReference from "../../_utils/db"
-import { notHasPayload } from "../../_utils/errors"
-import protectedRoute from "../../_utils/protectedRoute"
+import getDatabaseReference from "../../utils/db"
+import { notHasPayload } from "../../utils/errors"
+import protectedRoute from "../../utils/protectedRoute"
 
 export default protectedRoute(async (req, res) => {
   if (notHasPayload(req, res)) return

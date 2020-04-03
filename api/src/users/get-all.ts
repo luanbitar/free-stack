@@ -1,5 +1,5 @@
-import getDatabaseReference from "../../_utils/db"
-import protectedRoute from "../../_utils/protectedRoute"
+import getDatabaseReference from "../../utils/db"
+import protectedRoute from "../../utils/protectedRoute"
 
 export default protectedRoute(async (_, res) => {
   const db = await getDatabaseReference()
@@ -7,5 +7,5 @@ export default protectedRoute(async (_, res) => {
 
   const users = await collection.find({}).toArray()
 
-  res.status(200).json({ users })
+  return res.status(200).json({ users })
 })

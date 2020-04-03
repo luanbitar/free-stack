@@ -31,6 +31,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sass`,
       options: {
+        includePaths: [`${__dirname}/src/styles`],
         data: `@import "${__dirname}/src/styles/internal";`,
       },
     },
