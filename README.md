@@ -24,7 +24,7 @@ Need to create a `api/env.json` file with keys and replace with your data:
 - Hide file: `git secret hide file.exe`
 - Recover files: `git secret reveal`
 
-# Front
+# Front: https://free-stack-front.now.sh
 
 ## Styles - SCSS
 
