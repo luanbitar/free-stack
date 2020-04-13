@@ -1,16 +1,27 @@
-import getDatabaseReference from "../../utils/db"
+import { getCollection } from "../../utils/db"
 import { notHasPayload } from "../../utils/errors"
-import protectedRoute from "../../utils/protectedRoute"
+import { ILambda, IUser } from "./../../utils/interfaces"
+import {
+  decryptPasswordFromRequest,
+  encryptPasswordToDatabase,
+} from "../../utils/auth"
 
-export default protectedRoute(async (req, res) => {
-  if (notHasPayload(req, res)) return
+const createUser: ILambda = async (req, res) => {
+  const { email, password: inputedPassword } = req.body
+  const collection = await getCollection("users")
 
-  const user = req.body
+  const alreadyExistsUser: IUser | null = await collection.findOne({
+    email,
+  })
+  if (!!alreadyExistsUser)
+    return res.status(200).send({ error: "User already exists." })
 
-  const db = await getDatabaseReference()
-  const collection = await db.collection("users")
+  const decryptedPassword = decryptPasswordFromRequest(inputedPassword)
+  const password = encryptPasswordToDatabase(decryptedPassword)
 
-  const response = await collection.insertOne(user)
+  const response = await collection.insertOne({ email, password })
 
-  res.status(200).json({ response })
-})
+  return res.status(200).json({ response })
+}
+
+export default notHasPayload(createUser)
