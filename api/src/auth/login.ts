@@ -17,7 +17,7 @@ const login: Lambda = (req, res) => {
 
   const token = signToken({ userName, decryptedPassword, encryptedPassword })
 
-  return res.status(200).send(token)
+  return res.status(200).send({ token })
 }
 
 export default notHasPayload(login)

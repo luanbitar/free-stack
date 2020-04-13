@@ -1,5 +1,8 @@
+import { Lambda } from "./../../utils/interfaces"
 import protectedRoute from "../../utils/protectedRoute"
 
-export default protectedRoute((_, res, decryptedContent) => {
-  return res.status(200).send({ decryptedContent })
-})
+const decryptToken: Lambda = (_, res, context) => {
+  return res.status(200).send({ context })
+}
+
+export default protectedRoute(decryptToken)
