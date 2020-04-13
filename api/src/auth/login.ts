@@ -1,22 +1,32 @@
-import { Lambda } from "./../../utils/interfaces"
+import { getCollection } from "../../utils/db"
 import { notHasPayload } from "../../utils/errors"
-import signToken from "../../utils/login/signToken"
-import encryptPasswordToDatabase from "../../utils/login/encryptPasswordToDatabase"
-import decryptPasswordFromRequest from "../../utils/login/decryptPasswordFromRequest"
+import { ILambda, IUser } from "./../../utils/interfaces"
+import {
+  signToken,
+  decryptPasswordFromRequest,
+  encryptPasswordToDatabase,
+} from "../../utils/auth"
 
-const login: Lambda = (req, res) => {
-  const { userName, password } = req.body
+const login: ILambda = async (req, res) => {
+  const { email, password } = req.body
+  const collection = await getCollection("users")
 
-  const decryptedPassword = decryptPasswordFromRequest(password)
+  const user: IUser | null = await collection.findOne({
+    email,
+  })
+  if (!user) return res.status(200).send({ error: "User not found." })
 
-  const encryptedPassword = encryptPasswordToDatabase(decryptedPassword)
+  const inputedPurePassword = decryptPasswordFromRequest(password)
+  const inputedCipherPassword = encryptPasswordToDatabase(inputedPurePassword)
+  const dbPassword = user.password
 
-  // find username and password
-  // if is not found, return 404 error
-  // finally sign jwt and return
+  const isInvalidPassword = inputedCipherPassword !== dbPassword
+  if (isInvalidPassword)
+    return res.status(200).send({
+      error: "Invalid password.",
+    })
 
-  const token = signToken({ userName, decryptedPassword, encryptedPassword })
-
+  const token = signToken({ user })
   return res.status(200).send({ token })
 }
 

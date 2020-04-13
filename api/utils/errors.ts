@@ -1,6 +1,6 @@
-import { ZeitLambda } from "./interfaces"
+import { IZeitLambda } from "./interfaces"
 
-export const notHasPayload: ZeitLambda = lambda => (req, res) => {
+export const notHasPayload: IZeitLambda = (lambda) => (req, res) => {
   const notHasBodyPayload = !!req && !!req.body
 
   if (!notHasBodyPayload) {

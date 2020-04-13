@@ -1,9 +1,9 @@
 import { verify } from "jsonwebtoken"
 
 import { JWT_TOKEN } from "../env.json"
-import { ZeitLambda, User, Context } from "./interfaces"
+import { IZeitLambda, IUser, IContext } from "./interfaces"
 
-const protectedRoutes: ZeitLambda = lambda => (req, res, context) => {
+const protectedRoutes: IZeitLambda = (lambda) => (req, res, context) => {
   const authorization = req.headers.authorization
   const hasAuthorizationHeader = authorization && authorization.length > 0
 
@@ -17,9 +17,9 @@ const protectedRoutes: ZeitLambda = lambda => (req, res, context) => {
   verify(token, JWT_TOKEN, (error, decryptedContent) => {
     if (error) return res.json({ error })
 
-    const newContext: Context = {
+    const newContext: IContext = {
       ...context,
-      user: decryptedContent as User,
+      user: decryptedContent as IUser,
     }
 
     lambda(req, res, newContext)
