@@ -28,7 +28,8 @@ Need to create a `api/env.json` file with keys and replace with your data:
 
 ## Styles - SCSS
 
-Styles are divided in internal stuff (variable, mixins, rupture, etc.) wich are only used in internal scss files, and global stuff (typography, normalize, base styles) which are classes with styles that will be applieds in the DOM. ---IMPORTANT--- DONT PUT CLASSES IN THE INTERNAL STUFF, they will be generate dupicated styles.
+Styles are divided in internal stuff inside `internal.scss` (variable, mixins, rupture, etc.) wich are only used in internal scss files, and global stuff in `global.scss` (typography, normalize, base styles) which are classes with styles that will be applieds in the DOM.
+---IMPORTANT--- DONT PUT CLASSES IN THE INTERNAL STUFF, they will be generate dupicated styles.
 
 Features:
 
