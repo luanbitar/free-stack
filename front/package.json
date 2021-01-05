@@ -4,7 +4,7 @@
   "author": "Luan Bitar <7@lbitar.com>",
   "license": "MIT",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "gatsby": "^2.19.45",
     "gatsby-alias-imports": "^1.0.4",
     "gatsby-env-variables": "^2.0.0",
